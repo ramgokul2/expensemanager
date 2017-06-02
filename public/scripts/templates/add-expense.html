@@ -1,0 +1,51 @@
+<div class ="Modal">
+	<div class="Modal-cover">
+
+		<div class="Modal-container">
+
+			<div class="Modal-titleContainer">
+				<div class="Modal-title"> <b>Add Your Expenses <b></div>
+				<div class="modal-close btn-close">
+					<buton type="button" class="close Modal-close" data-dismiss="modal"> X </buton>
+				</div>
+			</div>
+
+			<div class="Modal-body">
+				<div class="Modal-content">
+					<p style="text-align: center;"> Lets you add expenses </p>	
+					<form style="width: 300px;" action="" class="add-expenses">
+                        <fieldset class="Modal-fieldset">
+                            <label class="Modal-formLabel" for="">Category</label>
+                            <select class="category-type Modal-inputField" id="category-type">
+                              <option value="Food">Food</option>
+                              <option value="Transport">Transport</option>
+                              <option value="Rent">Rent</option>
+                              <option value="Shopping">Shopping</option>
+                              <option value="others">Others</option>
+                            </select>
+                        </fieldset>
+
+                        <fieldset class="Modal-fieldset">
+                            <label class="Modal-formLabel" for="">Cost</label>
+                            <input class="Modal-inputField expense-cost" type="number" placeholder="[In Rupees]">
+                        </fieldset>
+
+                        <fieldset class="Modal-fieldset">
+                        	<label class="Modal-formLabel" for="">Date</label>
+                        	<input class="Modal-inputField datepicker" name="datepicker"> 
+                        </fieldset>
+
+                        <fieldset class="Modal-fieldset">
+                            <label class="Modal-formLabel" for="">Description</label>
+                            <textarea class="Modal-inputField expense-desc"></textarea>
+                        </fieldset>
+
+                        <button id="save-day-expense" class="save-expense save btn btn-success" data-style="expand-left">
+                          <span>Save Expenses</span>
+                        </button>
+                    </form>	
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                   

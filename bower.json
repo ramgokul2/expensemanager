@@ -1,0 +1,33 @@
+{
+  "name": "expensemanager",
+  "description": "Lets user manage his expenses.",
+  "main": "index.js",
+  "authors": [
+    "Gokul"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ramgokul2/expensemanager",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "backbone": "^1.3.3",
+    "underscore": "^1.8.3",
+    "requirejs": "^2.3.3",
+    "text": "requirejs-text#^2.0.15",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
+    "daterangepicker": "^1.6.0",
+    "bootstrap-daterangepicker": "^2.1.25"
+  },
+  "resolutions": {
+    "moment": "^2.18.1"
+  }
+}
