@@ -1,3 +1,7 @@
+body {
+  background: black;
+}
+
 .content {
   margin-left: 140px;
 }
@@ -65,3 +69,21 @@
     z-index: 1001; }
     
 .datepicker {z-index: 1151 !important;}
+
+.reports-main-container {
+  color: inherit;
+  background: #eee;
+  height: 100%;
+  margin-left: 89px;
+  position: fixed;
+  width: 87%;
+}
+
+.reports-hcontent {
+  margin: 40px;
+  display: inline-flex;
+}
+
+.reports-datepicker {
+  margin-left: 313px;
+}

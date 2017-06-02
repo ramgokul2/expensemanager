@@ -14,14 +14,14 @@ define(['backbone', 'underscore', 'text!templates/home.html', 'jquery', 'views/m
   		events: {},
 
   		renderSubViews: function() {
-  			mainView = new menuComponent();
   			contentView = new contentComponent();
-  			mainView.render();
   			contentView.render();
   		},
 
   		render: function() {
   			this.$el.html(this.template());
+        mainView = new menuComponent();
+        mainView.render();
   		}
   	});
   	return homeView;

@@ -49,14 +49,26 @@ router.post('/addExpense', function(req, res) {
   });
 });
 
-router.post('/fetchExpense', function(req, res) {
-	let date = req.body.date;
-	ExpenseModel.findOne({
+router.post('/fetchExpenses', function(req, res) {
+	let fdate = req.body.fromDate,
+      tdate = req.body.toDate;
+	ExpenseModel.find({
 		date: {
-			$gt: "2017-05-01 18:30:00.000Z",
-			$lt: "2019-07-03 18:30:00.000Z"
+			$gt: fdate,
+			$lt: tdate
 		}
-	}).pretty();
+	}, function(err, result) {
+    console.log(result);
+    if(err) {
+      return res.status(500).json({
+        'message': 'Could not fetch expense details'
+      });
+    } else {
+      return res.status(200).json({
+        data: result
+      })
+    }
+  });
 })
 
 module.exports = router;

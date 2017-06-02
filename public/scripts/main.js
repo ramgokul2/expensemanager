@@ -31,7 +31,10 @@ define(function(require) {
       _ = require('underscore');
 
   var HomeComponent = require('views/home'),
-      ReportsComponent = require('views/reports');
+      ReportsComponent = require('views/reports'),
+      ReportsModel = require('models/reports');
+
+      reportsModel = new ReportsModel();
 
   var mainrouter = Backbone.Router.extend({
 
@@ -56,7 +59,7 @@ define(function(require) {
     },
 
     reports: function() {
-      reportsView =  new ReportsComponent();
+      reportsView =  new ReportsComponent({model: reportsModel });
       reportsView.render();
     }
 
