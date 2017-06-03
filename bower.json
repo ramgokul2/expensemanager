@@ -25,7 +25,8 @@
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
     "daterangepicker": "^1.6.0",
-    "bootstrap-daterangepicker": "^2.1.25"
+    "bootstrap-daterangepicker": "^2.1.25",
+    "amcharts": "^3.15.2"
   },
   "resolutions": {
     "moment": "^2.18.1"

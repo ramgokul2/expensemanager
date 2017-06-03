@@ -51,24 +51,26 @@ router.post('/addExpense', function(req, res) {
 
 router.post('/fetchExpenses', function(req, res) {
 	let fdate = req.body.fromDate,
-      tdate = req.body.toDate;
-	ExpenseModel.find({
-		date: {
-			$gt: fdate,
-			$lt: tdate
-		}
-	}, function(err, result) {
-    console.log(result);
-    if(err) {
-      return res.status(500).json({
-        'message': 'Could not fetch expense details'
-      });
-    } else {
-      return res.status(200).json({
-        data: result
-      })
+      tdate = req.body.toDate,
+      category = req.body.category
+  if(category === "All") {    
+  	ExpenseModel.find({
+  		date: {
+  			$gt: fdate,
+  			$lt: tdate
+  		}
+  	}, function(err, result) {
+      console.log(result);
+      if(err) {
+        return res.status(500).json({
+          'message': 'Could not fetch expense details'
+        });
+      } else {
+        return res.status(200).json({
+          data: result
+        });
+      }
+    });
     }
-  });
-})
-
+});   
 module.exports = router;

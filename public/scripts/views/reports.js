@@ -1,5 +1,5 @@
-define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'daterangepicker', 'moment', 'moment-timezone', 'models/reports'],
-  function(Backbone, _, reportstmpl, $, daterangepicker, moment, tz, ReportsModel ) {
+define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'daterangepicker', 'moment', 'moment-timezone', 'models/reports', 'amcharts.pie'],
+  function(Backbone, _, reportstmpl, $, daterangepicker, moment, tz, ReportsModel, AmCharts) {
 
   	const reportsView = Backbone.View.extend({
   		el: "#main-container",
@@ -8,7 +8,7 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
 
   		initialize: function() {
   		  _.bindAll(this, 'setDates');
-       // this.listenTo(this.model, 'change', this.setDates)
+        this.listenTo(this.model, 'change', this.renderData)
   		},
 
   		events: {
@@ -40,10 +40,49 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
           url: "api/fetchExpenses",
           method: "POST",
           data: expenseData
-        }).done(function(data, textStatus, xhr) {
-          console.log(data);
+        }).done(function(result, textStatus, xhr) {
+          var summary = {},
+              details = [];
+          var resObj = _.map(result.data, function(dt) {
+            var data = {
+             // date: moment(dt.date).format("YYYY-MM-DD"),
+              expenses: _.map(dt.expenses, function(t) {
+                summary[t.category] = (typeof summary[t.category] === 'undefined')? t.expense: summary[t.category]+t.expense;
+              })
+            }
+            return data;
+          });
+          var keys = Object.keys(summary),
+              value = Object.values(summary);
+
+          for(let index=0; index<keys.length; index++) {
+            let processedResult = {
+              category: keys[index],
+              expense: value[index]
+            }
+            details.push(processedResult);
+          }    
+          console.log(details);
+          var makeChart = function() {
+            var chart = AmCharts.makeChart( "pie-chart", {
+ "type": "pie",
+  "theme": "light",
+  "dataProvider":details,
+  "valueField": "expense",
+  "titleField": "category",
+  "outlineAlpha": 0.4,
+  "depth3D": 15,
+  "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+  "angle": 30,
+  "export": {
+    "enabled": true
+  }
+} );
+          }
+
+          makeChart();
         });    
-      }
+      },
 
   	});
   	return reportsView;

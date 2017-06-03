@@ -11,6 +11,11 @@ require.config({
     
     "moment-timezone": {
       deps: ['moment']
+    },
+
+    'amcharts.pie': {
+      deps: [ 'amcharts' ],
+      exports: 'AmCharts',
     }
   },
   paths: {
@@ -22,7 +27,9 @@ require.config({
     moment: '../bower_components/moment/moment',
     "moment-timezone": '../bower_components/moment-timezone/builds/moment-timezone-with-data-2012-2022', 
     bootstrap: '../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap',
-    text: '../bower_components/text/text'  }
+    text: '../bower_components/text/text',
+    amcharts: '../bower_components/amcharts/dist/amcharts/amcharts',
+    "amcharts.pie": '../bower_components/amcharts/dist/amcharts/pie'  }
 });
 
 define(function(require) {
