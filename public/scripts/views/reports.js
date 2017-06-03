@@ -7,8 +7,8 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
   		template: _.template(reportstmpl),
 
   		initialize: function() {
-  		  _.bindAll(this, 'setDates');
-        this.listenTo(this.model, 'change', this.renderData)
+  		  _.bindAll(this, 'setDates', 'renderData');
+       // this.listenTo(this.model, 'change', this.renderData)
   		},
 
   		events: {
@@ -27,6 +27,7 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
           fromDate: moment(datepicker.startDate).format("YYYY-MM-DD"),
           toDate: moment(datepicker.endDate).format("YYYY-MM-DD")
         });
+        this.renderData();
       },
 
       renderData: function() {
@@ -62,28 +63,29 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
             }
             details.push(processedResult);
           }    
-          console.log(details);
           var makeChart = function() {
-            var chart = AmCharts.makeChart( "pie-chart", {
- "type": "pie",
-  "theme": "light",
-  "dataProvider":details,
-  "valueField": "expense",
-  "titleField": "category",
-  "outlineAlpha": 0.4,
-  "depth3D": 15,
-  "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
-  "angle": 30,
-  "export": {
-    "enabled": true
-  }
-} );
+           var chart = AmCharts.makeChart( "pie-chart", {
+           "type": "pie",
+            "theme": "light",
+            "dataProvider":details,
+            "valueField": "expense",
+            "titleField": "category",
+            "outlineAlpha": 0.4,
+            "depth3D": 15,
+            "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+            "angle": 30,
+            "legend": {
+              valueText :'\n'
+            },
+            "export": {
+              "enabled": true
+            }
+            } );
           }
 
           makeChart();
         });    
       },
-
   	});
   	return reportsView;
 });

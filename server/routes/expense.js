@@ -29,7 +29,9 @@ router.post('/addExpense', function(req, res) {
   						'message': 'Could not update expense details'
   					})
   				} else {
-  					console.log(result);
+  					return res.status(200).json({
+              'message': 'Successfully saved'
+            });
   				}
   			});
   		} else {

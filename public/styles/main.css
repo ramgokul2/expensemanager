@@ -73,7 +73,7 @@ body {
 .reports-main-container {
   color: inherit;
   background: #eee;
-  height: 100%;
+  height: 85%;
   margin-left: 89px;
   position: fixed;
   width: 87%;
@@ -91,7 +91,7 @@ body {
 .reports-container {
   display: inline-block;
   width: 67%;
-  margin-right: 20px;
+  margin-left: 190px;
   vertical-align: right;
 }
 
@@ -101,5 +101,5 @@ body {
 
 #pie-chart {
   width: 100%;
-  height: 250px;
+  height: 400px;
 }

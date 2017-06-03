@@ -28,7 +28,13 @@ define(['backbone', 'underscore', 'text!templates/add-expense.html', 'jquery', '
         self.model.save(this.getValues(), {
           success: function(model, response ) {
             console.log(response);
+            self.$el.find('.error')
+                .html('<span class="fa fa-check"></span>&nbsp;&nbsp; Expense Details Saved.')
+                .fadeIn()
+                .delay(12000)
+                .fadeOut();
             self.collection.add(response.expense_detail);
+            self.$el.children().remove();
           } 
         })
       },
