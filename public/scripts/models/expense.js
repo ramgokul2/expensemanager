@@ -19,6 +19,16 @@ define([
     },
 
     validate: function(attrs, options) {
+      var errors = [];
+      if(!attrs.expense) {
+        errors.push({ name: 'expense', message: 'Please add expense details'});
+      }
+
+      if(!attrs.date) {
+        errors.push({ name: 'date', message: 'Please select a date'});
+      }
+
+      return errors.length > 0 ? errors: false;
     },
 
     parse: function(response, options)  {

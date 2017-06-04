@@ -6,6 +6,13 @@ body {
   margin-left: 140px;
 }
 
+.expense-error {
+  position: absolute;
+  left: 210px;
+  bottom: 148px;
+  color:red; 
+}
+
 .Modal-cover {
   position: fixed;
   top: 0;

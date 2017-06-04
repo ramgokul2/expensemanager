@@ -36,6 +36,7 @@ router.post('/addExpense', function(req, res) {
   			});
   		} else {
   			expenseModel.save(function(err, expense) {
+          console.log(expense);
 		    if(err) {
 		      return res.status(500).json({
 		        'message': 'Could not save expense details'

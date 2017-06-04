@@ -22,21 +22,43 @@ define(['backbone', 'underscore', 'text!templates/add-expense.html', 'jquery', '
   		},
 
       saveDetails: function(e) {
-        let self = this;
         e.preventDefault();
-        console.log(this.model);
+        let self = this,
+            hasErrors = self.validateForm();
+        
         self.model.save(this.getValues(), {
           success: function(model, response ) {
             console.log(response);
             self.$el.find('.error')
-                .html('<span class="fa fa-check"></span>&nbsp;&nbsp; Expense Details Saved.')
-                .fadeIn()
-                .delay(12000)
-                .fadeOut();
-            self.collection.add(response.expense_detail);
-            self.$el.children().remove();
+                .html('<span class="fa fa-check"></span>&nbsp;&nbsp; Expense Details Saved.');
+            self.collection.add(response.expense_detail);    
+            this.setTimeout(function() {
+              self.$el.children().remove();
+            }, 3000);    
+          },
+          error: function(model, response) {
+            var errors = response.responseJSON;
+            self.$el.find('.error').html('<span class="fa fa-times">&nbsp;nbsp;' ( response.responseJSON));
           } 
         })
+      },
+
+      validateForm: function() {
+        var self = this;
+
+        self.$el.find('.expense-error').text('');
+        self.$el.find('.expense-error').text('');
+
+        var errors = self.model.validate(_.pick(self.getValues(), 'expense', 'date'));
+            _.each(errors, function(error) {
+              let name = error.name;
+              if(name === "expense") {
+                self.$el.find('.expense-error').text(error.message);
+              } else if(name === "date") {
+                self.$el.find('.date-error').text(error.message);
+              }
+           });
+            return (errors.length)?true:false;
       },
 
       getValues: function() {

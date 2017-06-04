@@ -8,7 +8,6 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
 
   		initialize: function() {
   		  _.bindAll(this, 'setDates', 'renderData');
-       // this.listenTo(this.model, 'change', this.renderData)
   		},
 
   		events: {
