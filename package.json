@@ -23,6 +23,7 @@
     "browserify": "^14.3.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
+    "express-favicon": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-livereload": "^3.8.1",
