@@ -64,6 +64,9 @@ define(['backbone', 'underscore', 'text!templates/add-expense.html', 'jquery', '
       getValues: function() {
         let obj = {};
         obj.category = this.$el.find('#category-type option:selected').val();
+        if(obj.category === '') {
+          obj.category = this.$el.find('.expense-customcategory').val();
+        }
         obj.expense = this.$el.find('.expense-cost').val();
         obj.date = this.$el.find('.datepicker').val();
         obj.notes = this.$el.find('.expense-desc').val();
