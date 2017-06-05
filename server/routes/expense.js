@@ -51,8 +51,7 @@ router.post('/addExpense', function(req, res) {
 router.post('/fetchExpenses', function(req, res) {
 	let fdate = moment(req.body.fromDate).format(),
       tdate = moment(req.body.toDate).add(1,'days').format()
-console.log(fdate);
-console.log(tdate);
+      
   	ExpenseModel.find({
   		date: {
   			$gt: fdate,
