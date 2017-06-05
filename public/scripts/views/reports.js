@@ -34,7 +34,6 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
             expenseData = {
               fromDate: this.model.get('fromDate'),
               toDate: this.model.get('toDate'),
-              category: this.$el.find('.category-type').val()
             };
         $.ajax({
           url: "api/fetchExpenses",

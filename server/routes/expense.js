@@ -1,6 +1,7 @@
 const express = require('express'),
 	  router = express.Router(),
-	  async = require('async')
+	  async = require('async'),
+    moment = require('moment')
 
 const ExpenseModel = require('../models/expense');	  
 
@@ -48,14 +49,14 @@ router.post('/addExpense', function(req, res) {
 });
 
 router.post('/fetchExpenses', function(req, res) {
-	let fdate = req.body.fromDate,
-      tdate = req.body.toDate,
-      category = req.body.category
-  if(category === "All") {    
+	let fdate = moment(req.body.fromDate).format(),
+      tdate = moment(req.body.toDate).add(1,'days').format()
+console.log(fdate);
+console.log(tdate);
   	ExpenseModel.find({
   		date: {
   			$gt: fdate,
-  			$lt: tdate
+  			$lte: tdate
   		}
   	}, function(err, result) {
       console.log(result);
@@ -69,7 +70,6 @@ router.post('/fetchExpenses', function(req, res) {
         });
       }
     });
-    }
 });
 
 function validateExpense(expense) {
@@ -94,7 +94,7 @@ function getValues(expense) {
   }
   expenseModel = new ExpenseModel({
     expenses: expenseObj,
-    date: expense.date
+    date: moment(expense.date).add('1', 'days').format()
   });
   return expenseModel;
 }
