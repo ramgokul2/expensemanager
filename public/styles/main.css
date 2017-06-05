@@ -126,3 +126,10 @@ body {
 .reports-stats {
   margin: 18%;
 }
+
+.expense-category-error {
+  position: absolute;
+  left: 210px;
+  bottom: 245px;
+  color: red;
+}

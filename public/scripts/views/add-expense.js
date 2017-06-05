@@ -25,33 +25,38 @@ define(['backbone', 'underscore', 'text!templates/add-expense.html', 'jquery', '
         e.preventDefault();
         let self = this,
             hasErrors = self.validateForm();
-        
-        self.model.save(this.getValues(), {
-          success: function(model, response ) {
-            console.log(response);
-            self.$el.find('.error')
-                .html('<span class="fa fa-check"></span>&nbsp;&nbsp; Expense Details Saved.');
-            self.collection.add(response.expense_detail);    
-            this.setTimeout(function() {
-              self.$el.children().remove();
-            }, 3000);    
-          },
-          error: function(model, response) {
-            var errors = response.responseJSON;
-            self.$el.find('.error').html('<span class="fa fa-times">&nbsp;nbsp;' ( response.responseJSON));
-          } 
-        })
+        if(hasErrors) {
+          self.model.save(this.getValues(), {
+            success: function(model, response ) {
+              console.log(response);
+              self.$el.find('.error')
+                  .html('<span class="fa fa-check"></span>&nbsp;&nbsp; Expense Details Saved.');
+              self.collection.add(response.expense_detail);    
+              this.setTimeout(function() {
+                self.$el.children().remove();
+              }, 2500);    
+            },
+            error: function(model, response) {
+              var errors = response.responseJSON;
+              self.$el.find('.error').html('<span class="fa fa-times">&nbsp;nbsp;' + ( response.responseJSON));
+            } 
+          }) 
+        }  
       },
 
       validateForm: function() {
         var self = this;
 
         self.$el.find('.expense-error').text('');
-        self.$el.find('.expense-error').text('');
+        self.$el.find('.expense-category-error').text('');
 
-        var errors = self.model.validate(_.pick(self.getValues(), 'expense', 'date'));
+        var errors = self.model.validate(_.pick(self.getValues(), 'expense', 'date', 'category'));
             _.each(errors, function(error) {
               let name = error.name;
+              if(name === "category") {
+                self.$el.find(".expense-category-error").text(error.message);
+              }
+
               if(name === "expense") {
                 self.$el.find('.expense-error').text(error.message);
               } else if(name === "date") {

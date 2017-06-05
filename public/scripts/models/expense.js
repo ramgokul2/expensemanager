@@ -20,6 +20,10 @@ define([
 
     validate: function(attrs, options) {
       var errors = [];
+      if(!attrs.category) {
+        errors.push({ name:'category', message:'Please choose a category' });
+      }
+
       if(!attrs.expense) {
         errors.push({ name: 'expense', message: 'Please add expense details'});
       }
