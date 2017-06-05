@@ -41,13 +41,22 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
           method: "POST",
           data: expenseData
         }).done(function(result, textStatus, xhr) {
+          if(result.data.length === 0) {
+            self.$el.find('#pie-chart').hide();
+            self.$el.find('reports-stats').show();
+            self.$el.find('.reports-stats').html("<h2 class='msg'>NO EXPENSE DETAILS FOUND!!!</h2>");
+            return;
+          } else {
+            self.$el.find('.reports-stats').hide();
+            self.$el.find('#pie-chart').show();
+          }
           var summary = {},
               details = [];
           var resObj = _.map(result.data, function(dt) {
             var data = {
              // date: moment(dt.date).format("YYYY-MM-DD"),
               expenses: _.map(dt.expenses, function(t) {
-                summary[t.category] = (typeof summary[t.category] === 'undefined')? t.expense: summary[t.category]+t.expense;
+                summary[t.category] = (typeof summary[t.category] === 'undefined')? t.expense: summary[t.category] + t.expense;
               })
             }
             return data;
@@ -58,7 +67,7 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
           for(let index=0; index<keys.length; index++) {
             let processedResult = {
               category: keys[index],
-              expense: value[index]
+              expense: value[index] 
             }
             details.push(processedResult);
           }    
