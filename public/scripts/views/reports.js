@@ -8,6 +8,7 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
 
   		initialize: function() {
   		  _.bindAll(this, 'setDates', 'renderData');
+        this.renderData();
   		},
 
   		events: {
@@ -42,11 +43,10 @@ define(['backbone', 'underscore', 'text!templates/reports.html', 'jquery', 'date
         }).done(function(result, textStatus, xhr) {
           if(result.data.length === 0) {
             self.$el.find('#pie-chart').hide();
-            self.$el.find('reports-stats').show();
-            self.$el.find('.reports-stats').html("<h2 class='msg'>NO EXPENSE DETAILS FOUND!!!</h2>");
+            self.$el.find('.msg').text("NO EXPENSE DETAILS FOUND!!!");
             return;
           } else {
-            self.$el.find('.reports-stats').hide();
+            self.$el.find('.msg').text('');
             self.$el.find('#pie-chart').show();
           }
           var summary = {},
