@@ -38,7 +38,7 @@ define(['backbone', 'underscore', 'text!templates/add-expense.html', 'jquery', '
         e.preventDefault();
         let self = this,
             hasErrors = self.validateForm();
-        if(hasErrors) {
+        if(!hasErrors) {
           self.model.save(this.getValues(), {
             success: function(model, response ) {
               console.log(response);
