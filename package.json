@@ -30,6 +30,8 @@
     "gulp-watch": "^4.3.11",
     "gulp-webserver": "^0.9.1",
     "lodash.assign": "^4.2.0",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "mongoose": "^4.10.2",
     "run-sequence": "^1.2.2",
     "watchify": "^3.9.0"
