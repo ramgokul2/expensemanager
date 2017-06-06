@@ -133,3 +133,8 @@ body {
   bottom: 245px;
   color: red;
 }
+
+.disabled {
+  opacity: .4;
+  pointer-events: none!important;
+}

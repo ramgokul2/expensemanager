@@ -11,7 +11,8 @@ define(['backbone', 'underscore', 'text!templates/add-expense.html', 'jquery', '
 
   		events: {
         'click .modal-close': 'closeModal',
-        'click .save-expense': 'saveDetails'
+        'click .save-expense': 'saveDetails',
+        'click .modal-checkbox': 'checkUpdate'
       },
 
   		render: function() {
@@ -19,7 +20,19 @@ define(['backbone', 'underscore', 'text!templates/add-expense.html', 'jquery', '
         this.$el.find('.datepicker').daterangepicker({
               "singleDatePicker": true,
          });
+        this.$el.find('.expense-customcategory').attr("disabled", true).addClass("disabled");
   		},
+
+      checkUpdate: function() {
+        let isChecked = this.$el.find('.modal-checkbox').is(":checked");
+        if(isChecked) {
+          this.$el.find('.category-type').attr("disabled",true).addClass("disabled");
+          this.$el.find('.expense-customcategory').removeAttr('disabled').removeClass("disabled");
+        } else {
+          this.$el.find('.category-type').removeAttr('disabled').removeClass("disabled");
+          this.$el.find('.expense-customcategory').attr("disabled", true).addClass("disabled");
+        }
+      },
 
       saveDetails: function(e) {
         e.preventDefault();
