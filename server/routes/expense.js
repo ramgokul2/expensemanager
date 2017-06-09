@@ -39,6 +39,7 @@ router.post('/addExpense', function(req, res) {
   		      });
   		    } else {
   		      return res.status(200).json({
+              'message': 'Saved details Successfully',
   		        'expense_detail': expense
   		      });
   		    }

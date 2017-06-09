@@ -4,7 +4,7 @@
   "description": "Lets user manage his expenses.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -35,5 +35,10 @@
     "mongoose": "^4.10.2",
     "run-sequence": "^1.2.2",
     "watchify": "^3.9.0"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.4.2"
   }
 }

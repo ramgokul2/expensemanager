@@ -1,13 +1,14 @@
 const express = require('express'),
 	  bodyParser = require('body-parser'),
 	  ejs = require('ejs'),
-	  favicon = require('express-favicon');
+	  favicon = require('express-favicon'),
+	  config = require('./config')
 	  path = require('path');
 
 let app = express();
 
 const db = require('./server/helper/db'),
-	  dbUrl = 'mongodb://localhost/expensemanager';
+	  dbUrl = config.db;
 
 db.connect(dbUrl);
 process.env.TZ = 'Asia/Kolkata';
@@ -27,3 +28,5 @@ app.set('port', 9000);
 app.listen(app.get('port'), () => {
 	console.log('Server started and listening @ ' + app.get('port'));
 });
+
+module.exports = app;
