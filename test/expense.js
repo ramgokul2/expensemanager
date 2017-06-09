@@ -20,21 +20,11 @@ describe("Post api", () => {
   let id, dummyPost;
 
   before((done) => {
-      mongoose.connect(config.testDb, () => {
+      mongoose.createConnection(config.testDb, () => {
           console.log('Connected to: '+ config.testDb);
           done();
       });
 
-      dummyPost = new Post({
-        'title': 'dummy',
-        'author': 'someone',
-        'body': 'Lorem ipsum dior'
-      });
-
-      dummyPost.save((err, post) => {
-          if (err) { res.send(err); }
-          id = post._id;
-      });
   });
 
     describe('Expenses', () => {

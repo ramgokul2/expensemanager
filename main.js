@@ -7,8 +7,15 @@ const express = require('express'),
 
 let app = express();
 
-const db = require('./server/helper/db'),
-	  dbUrl = config.db;
+const db = require('./server/helper/db');
+if(process.env.NODE_ENV === "test") {
+	dbUrl = config.testDb;
+	app.set('port', 8000);
+} else {
+	dbUrl = config.db;
+	app.set('port', 9000);
+}	
+
 
 db.connect(dbUrl);
 process.env.TZ = 'Asia/Kolkata';
@@ -23,7 +30,7 @@ app.use(favicon());
 
 app.use('/', require('./server/routes/index'));
 app.use('/api/', require('./server/routes/expense'));
-app.set('port', 9000);
+
 
 app.listen(app.get('port'), () => {
 	console.log('Server started and listening @ ' + app.get('port'));
