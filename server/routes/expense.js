@@ -22,6 +22,7 @@ router.post('/addExpense', function(req, res) {
           function(err, result) {
   				if(err) {
   					return res.status(500).json({
+              'error': expenseValid,
   						'message': 'Could not update expense details'
   					});
   				} else {
@@ -35,6 +36,7 @@ router.post('/addExpense', function(req, res) {
             console.log(expense);
   		    if(err) {
   		      return res.status(500).json({
+              'error': expenseValid,
   		        'message': 'Could not save expense details'
   		      });
   		    } else {
@@ -76,7 +78,11 @@ function validateExpense(expense) {
   let error = null,
       date = new Date(expense.date);
 
-  if(isNaN(date.getTime())) {
+  if(!(expense.date)) {
+    error = "You gotto provide date";
+  } else if(!expense.expense) {
+    error = "You need to provide expense details";
+  } else if(isNaN(date.getTime())) {
     error = "The date you have provided is invalid!";
   } else if(isNaN(expense.expense)) {
     error = "The amount you entered is not in number";
